@@ -1,0 +1,18 @@
+# 서버가 게임 클라이언트(/)와 WebSocket을 같은 주소에서 함께 제공합니다. 서비스 1개만 만들면 됩니다.
+services:
+  - type: web
+    name: iron-veil-v20-server
+    runtime: node
+    plan: free
+    buildCommand: npm install --omit=dev --no-audit --no-fund
+    startCommand: node server.js
+    healthCheckPath: /health
+    envVars:
+      - key: NODE_VERSION
+        value: "20"
+      - key: NODE_ENV
+        value: production
+      - key: MAX_PLAYERS
+        value: "20"
+      - key: MATCH_DURATION_SECONDS
+        value: "300"
